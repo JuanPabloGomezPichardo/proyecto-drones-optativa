@@ -1,0 +1,12 @@
+# Ignorar archivos sensibles y basura
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.venv/
+env/
+offline_data.json
+.DS_Store
+Thumbs.db
