@@ -33,11 +33,9 @@ class Coordinador:
         return False
 
     def asignar_drone_a_mision(self, drone_id, mision_id):
-        # Simula asignación
         drone = next((d for d in self.listar_drones() if d.id == drone_id), None)
         if drone and drone.disponible:
             drone.disponible = False
-            # Actualizar en BD
             conn = get_connection()
             cur = conn.cursor()
             cur.execute("UPDATE drones SET disponible = 0 WHERE id = %s", (drone_id,))

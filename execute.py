@@ -23,7 +23,7 @@ class App:
 
     def inicio(self):
         self.limpiar()
-        tk.Label(self.root, text="SISTEMA DE GESTIÓN DE DRONES", font=("Arial", 32, "bold"), fg="#58a6ff", bg="#0d1117").pack(pady=100)
+        tk.Label(self.root, text="SISTEMA DE GESTION DE DRONES", font=("Arial", 32, "bold"), fg="#58a6ff", bg="#0d1117").pack(pady=100)
         tk.Label(self.root, text="Juan Pablo Gómez Pichardo - ISW-25 - 022000396", font=("Arial", 14), fg="#8b949e", bg="#0d1117").pack(pady=10)
 
         tk.Button(self.root, text="INICIAR SESIÓN", command=self.pantalla_login, width=35, height=3, bg="#238636", fg="white", font=("Arial", 16, "bold")).pack(pady=20)

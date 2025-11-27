@@ -1,4 +1,4 @@
-# fix_admin.py - Corrige el admin para que funcione el login
+# Corrige el admin para que funcione el login
 import hashlib
 from db_connection import get_connection
 

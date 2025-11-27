@@ -9,7 +9,7 @@ class Usuario:
     def __init__(self, id: int, nombre: str, role: str):
         self.id = id
         self.nombre = nombre
-        self.role = role  # admin, operador, rescatista
+        self.role = role 
 
     @classmethod
     def crear(cls, nombre: str, role: str, password: str):

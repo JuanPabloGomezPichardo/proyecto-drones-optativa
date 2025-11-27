@@ -1,4 +1,4 @@
-# mision.py - VERSIÓN FINAL 100% FUNCIONAL
+# mision.py
 from db_connection import get_connection
 
 class Mision:

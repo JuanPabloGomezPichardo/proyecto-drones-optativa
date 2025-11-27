@@ -42,9 +42,8 @@ CREATE TABLE reportes (
     FOREIGN KEY (mision_id) REFERENCES misiones(id) ON DELETE CASCADE
 );
 
--- Usuario administrador por defecto
--- usuario: admin
--- contraseña: admin123
+-- admin
+-- admin123
 INSERT INTO usuarios (nombre, role, password) VALUES (
     'admin', 
     'admin', 
