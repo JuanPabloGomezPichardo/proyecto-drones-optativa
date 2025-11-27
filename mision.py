@@ -2,7 +2,7 @@
 from db_connection import get_connection
 
 class Mision:
-    TIPOS_VALIDOS = ["búsqueda", "suministros", "vigilancia", "mapeo"]
+    TIPOS_VALIDOS = ["busqueda", "suministros", "vigilancia", "mapeo"]
 
     def __init__(self, id: int, tipo: str, operador_id: int, estado: str = "pendiente"):
         self.id = id
