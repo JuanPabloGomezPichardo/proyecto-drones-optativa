@@ -23,13 +23,10 @@ CREATE TABLE drones (
 -- Tabla misiones
 CREATE TABLE misiones (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    tipo ENUM('busqueda', 'entrega_suministros', 'vigilancia', 'mapeo_terreno') NOT NULL,
-    drone_id INT NULL,
+    tipo VARCHAR(20) NOT NULL,
     operador_id INT NOT NULL,
-    estado ENUM('pendiente', 'en_curso', 'completada', 'cancelada') DEFAULT 'pendiente',
-    fecha_asignacion DATETIME DEFAULT CURRENT_TIMESTAMP,
-    fecha_finalizacion DATETIME NULL,
-    FOREIGN KEY (drone_id) REFERENCES drones(id) ON DELETE SET NULL,
+    estado ENUM('pendiente', 'en_curso', 'completada') DEFAULT 'pendiente',
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (operador_id) REFERENCES usuarios(id)
 );
 

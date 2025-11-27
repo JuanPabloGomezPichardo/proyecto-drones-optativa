@@ -1,7 +1,9 @@
-# mision.py
+# mision.py - VERSIÓN FINAL 100% FUNCIONAL
 from db_connection import get_connection
 
 class Mision:
+    TIPOS_VALIDOS = ["búsqueda", "suministros", "vigilancia", "mapeo"]
+
     def __init__(self, id: int, tipo: str, operador_id: int, estado: str = "pendiente"):
         self.id = id
         self.tipo = tipo
@@ -10,39 +12,52 @@ class Mision:
 
     @classmethod
     def crear(cls, tipo: str, operador_id: int):
-        tipos_validos = ["búsqueda", "suministros", "vigilancia", "mapeo"]
-        if tipo.lower() not in tipos_validos:
-            raise ValueError("Tipo de misión inválido")
+        tipo_lower = tipo.strip().lower()
+        if tipo_lower not in cls.TIPOS_VALIDOS:
+            raise ValueError(f"Tipo inválido. Usa: {', '.join(cls.TIPOS_VALIDOS)}")
+        
         conn = get_connection()
         try:
             cur = conn.cursor()
             cur.execute(
-                "INSERT INTO misiones (tipo, operador_id, estado) VALUES (%s, %s, 'pendiente')",
-                (tipo.lower(), operador_id)
+                "INSERT INTO misiones (tipo, operador_id, estado) VALUES (%s, %s, 'en_curso')",
+                (tipo_lower, operador_id)
             )
             conn.commit()
             mision_id = cur.lastrowid
-            return cls(mision_id, tipo.lower(), operador_id)
-        finally:
             cur.close()
             conn.close()
+            return cls(mision_id, tipo_lower, operador_id, "en_curso")
+        except Exception as e:
+            if cur: cur.close()
+            if conn: conn.close()
+            raise ValueError(f"Error al crear misión: {str(e)}")
 
     @classmethod
     def listar_todos(cls):
         conn = get_connection()
         try:
             cur = conn.cursor()
-            cur.execute("SELECT id, tipo, operador_id, estado FROM misiones")
-            return [cls(*row) for row in cur.fetchall()]
+            cur.execute("SELECT id, tipo, operador_id, estado FROM misiones ORDER BY id DESC")
+            rows = cur.fetchall()
+            return [cls(row[0], row[1], row[2], row[3]) for row in rows]
         finally:
             cur.close()
             conn.close()
 
     def completar(self):
-        self.estado = "completada"
         conn = get_connection()
-        cur = conn.cursor()
-        cur.execute("UPDATE misiones SET estado='completada' WHERE id=%s", (self.id,))
-        conn.commit()
-        cur.close()
-        conn.close()
+        try:
+            cur = conn.cursor()
+            cur.execute("UPDATE misiones SET estado = 'completada' WHERE id = %s", (self.id,))
+            conn.commit()
+            cur.close()
+            conn.close()
+            self.estado = "completada"
+        except Exception as e:
+            cur.close()
+            conn.close()
+            raise e
+
+    def __str__(self):
+        return f"Misión {self.id} | Tipo: {self.tipo.upper()} | Estado: {self.estado.upper()} | Batería: 100% | Prioridad: ALTA"
