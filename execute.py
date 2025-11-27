@@ -1,4 +1,4 @@
-# execute.py - VERSIÓN FINAL OFICIAL - JUAN PABLO GÓMEZ PICHARDO - ISW-25 - 022000396
+# execute.py
 import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog
 from coordinador import Coordinador

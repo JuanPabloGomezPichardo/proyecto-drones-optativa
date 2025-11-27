@@ -28,7 +28,6 @@ class Coordinador:
         mision = next((m for m in self.listar_misiones() if m.id == mision_id), None)
         if mision:
             mision.completar()
-            # Aquí actualizar drone a disponible (simulado)
             return True
         return False
 
