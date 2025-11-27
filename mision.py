@@ -45,19 +45,26 @@ class Mision:
             cur.close()
             conn.close()
 
-    def completar(self):
+    def completar(self, rescatista_id: int):
         conn = get_connection()
         try:
             cur = conn.cursor()
-            cur.execute("UPDATE misiones SET estado = 'completada' WHERE id = %s", (self.id,))
+            cur.execute("""
+                UPDATE misiones 
+                SET estado = 'completada', fecha_finalizacion = NOW() 
+                WHERE id = %s
+            """, (self.id,))
+            
+            cur.execute("""
+                INSERT INTO reportes (mision_id, rescatista_id, observaciones)
+                VALUES (%s, %s, %s)
+            """, (self.id, rescatista_id, f"Misión completada por rescatista ID {rescatista_id}"))
+            
             conn.commit()
+        finally:
             cur.close()
             conn.close()
-            self.estado = "completada"
-        except Exception as e:
-            cur.close()
-            conn.close()
-            raise e
+        self.estado = "completada"
 
     def __str__(self):
         return f"Misión {self.id} | Tipo: {self.tipo.upper()} | Estado: {self.estado.upper()} | Batería: 100% | Prioridad: ALTA"

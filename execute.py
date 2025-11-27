@@ -169,7 +169,7 @@ class App:
             return
         mision = next((m for m in pendientes if m.id == mision_id), None)
         if mision:
-            mision.completar()
+            mision.completar(self.coordinador.usuario_actual.id)
             conn = get_connection()
             cur = conn.cursor()
             cur.execute("UPDATE drones SET disponible = 1 WHERE disponible = 0")
