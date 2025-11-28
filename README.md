@@ -8,7 +8,7 @@
 
 
 
-Proyecto Optativa - Cumple al 100% con las rúbricas de Unidad II y III
+Proyecto Optativa
 
 
 
@@ -24,7 +24,7 @@ Proyecto Optativa - Cumple al 100% con las rúbricas de Unidad II y III
 
 \- 7 clases implementadas
 
-\- 9 commits documentados
+\- commits documentados
 
 
 

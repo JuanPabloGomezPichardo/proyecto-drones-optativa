@@ -37,13 +37,16 @@ class App:
         self.entry_user.pack(pady=10)
         # self.entry_user.insert(0, "admin")
 
+
         tk.Label(self.root, text="Contraseña:", fg="white", bg="#0d1117", font=("Arial", 14)).pack(pady=10)
         self.entry_pass = tk.Entry(self.root, font=("Arial", 14), width=35, justify="center", show="*")
         self.entry_pass.pack(pady=10)
         # self.entry_pass.insert(0, "admin123")
 
+
         tk.Button(self.root, text="INGRESAR", command=self.login, bg="#238636", fg="white", font=("Arial", 16, "bold"), width=30).pack(pady=30)
         tk.Button(self.root, text="Volver", command=self.inicio, bg="#8b949e", fg="white").pack(pady=10)
+        
 
     def pantalla_registro(self):
         self.limpiar()
